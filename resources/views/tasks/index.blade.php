@@ -21,9 +21,11 @@
 
     <main class="grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="py-[100px]">
-                <p class="text-2xl font-bold text-center">前回の食べたもの： {{ $previous_feed[0]->name }}</p>
-                <p class="text-2xl font-bold text-center">残り体力： {{ $pet_hp }}</p>
+	    <div class="py-[100px]">
+		@if($previous_feed->isNotEmpty())
+		<p class="text-2xl font-bold text-center">前回の食べたもの： {{ $previous_feed[0]->name }}</p>
+		@endif
+		<p class="text-2xl font-bold text-center">現在の体力： {{ $pet_hp }}/100</p>
                 <div class="flex justify-center">
                     <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="150"
                         height=''>

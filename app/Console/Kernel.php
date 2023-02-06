@@ -18,12 +18,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+	    // $schedule->command('inspire')->hourly();
+	    // 15分毎にHPを1ずつ減らす、25時間で100減る
         $schedule->call(function () {
             $pet = Pet::find(1);
-            $pet->hp -= 5;
+            $pet->hp -= 1;
             $pet->save();
-        })->everyMinute();
+        })->everyFifteenMinutes();
     }
 
     /**
