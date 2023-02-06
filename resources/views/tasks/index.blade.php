@@ -14,23 +14,25 @@
     <header class="bg-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="py-6">
-                <p class="text-white text-xl">ペット育成習慣アプリ</p>
+                <p class="text-white text-xl anime_test">山田君育成アプリ : タスクをクリアして山田君をなるべく長く生かそう！</p>
             </div>
         </div>
     </header>
 
     <main class="grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
-	    <div class="py-[100px]">
+	    <div class="py-[30px]">
+
 		@if($previous_feed->isNotEmpty())
 		<p class="text-2xl font-bold text-center">前回の食べたもの： {{ $previous_feed[0]->name }}</p>
 		@endif
-		<p class="text-2xl font-bold text-center">現在の体力： {{ $pet_hp }}/100</p>
-                <div class="flex justify-center">
+
+	
+               <div class="flex justify-center fuwafuwa">
                     <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="150"
                         height=''>
-                </div>
-                <p class="text-2xl font-bold text-center">ここにペットの名前</p>
+		</div>	
+		<p class="text-2xl font-bold text-center">山田君 残り体力： {{ $pet_hp }}</p>
                 <form action="/tasks" method="post" class="mt-10">
                     @csrf
 
@@ -73,7 +75,6 @@
                             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-300">
                                     <thead class="bg-gray-50">
-                                        <tr>
                                             <th scope="col"
                                                 class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                                 タスク</th>
@@ -158,3 +159,4 @@
 </body>
 
 </html>
+<!DOCTYPE html>
