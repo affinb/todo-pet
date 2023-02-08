@@ -26,12 +26,13 @@
 		@if($previous_feed->isNotEmpty())
 		<p class="text-2xl font-bold text-center">前回の食べたもの： {{ $previous_feed[0]->name }}</p>
 		@endif
-
-	
-               <div class="flex justify-center fuwafuwa">
-                    <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="150"
+        <div class="text-center balloon2 w-screen flex justify-center items-center">
+            <p>私の戦闘力は{{ $pet_points }} です</p>
+          </div>
+                <div class="flex fuwafuwa">
+                    <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="100"
                         height=''>
-		</div>
+		        </div>
         <div class="flex justify-center">
             {{-- HPの色判定 --}}
             <p class="inline-block text-2xl font-bold text-center">山田君 残り体力： 

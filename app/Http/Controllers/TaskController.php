@@ -22,11 +22,12 @@ class TaskController extends Controller
         // 前回の与えたエサを持ってくる
         $previous_feed = Task::where('status', true)->orderByDesc('updated_at')->limit(1)->get();
 
-        // id=1のペットのHPを持ってくる
+        // id=1のペットのHP、ポイントを持ってくる
         $pet = Pet::find(1);
         $pet_hp = $pet->hp;
+        $pet_points = $pet->points;
         
-        return view('tasks.index', compact('tasks', 'pet_hp', 'previous_feed'));
+        return view('tasks.index', compact('tasks', 'pet_hp', 'pet_points', 'previous_feed'));
     }
 
     /**
@@ -139,9 +140,10 @@ class TaskController extends Controller
             $task = Task::find($id);
             $task->status = 1;
 
-            // 完了タスクのポイントをペットのHPに加算
+            // 完了タスクのポイントをペットのHPと合計ポイントに加算
             $pet = Pet::find(1);
             $pet->hp += $task->point;
+            $pet->points += $task->point;
 
             // HPの上限はとりあえず100
             if($pet->hp >= 100) {
