@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="flex flex-col min-h-[100vh]">
+<body class="flex flex-col min-h-[100vh] bg-blue-50">
     <header class="bg-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="py-6">
@@ -31,8 +31,20 @@
                <div class="flex justify-center fuwafuwa">
                     <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="150"
                         height=''>
-		</div>	
-		<p class="text-2xl font-bold text-center">山田君 残り体力： {{ $pet_hp }}</p>
+		</div>
+        <div class="flex justify-center">
+            {{-- HPの色判定 --}}
+            <p class="inline-block text-2xl font-bold text-center">山田君 残り体力： 
+                @if( $pet_hp >= 70 )
+                 <p class="inline-block text-green-500 text-2xl font-bold">{{ $pet_hp }}</p>
+                @endif
+                @if( $pet_hp <= 69 && $pet_hp >= 30 )
+                 <p class="inline-block text-yellow-500 text-2xl font-bold">{{ $pet_hp }}</p>
+                @endif
+                @if( $pet_hp <= 29 )
+                <p class="inline-block text-red-500 text-2xl font-bold">{{ $pet_hp }}</p>
+               @endif
+        </div>
                 <form action="/tasks" method="post" class="mt-10">
                     @csrf
 
@@ -40,7 +52,7 @@
                         <label class="w-full max-w-3xl mx-auto">
                             <input
                                 class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                                placeholder="洗濯物をする..." type="text" name="task_name" />
+                                placeholder="タスクを入力    ex.リングフィットする..." type="text" name="task_name" />
                             @error('task_name')
                                 <div class="mt-3">
                                     <p class="text-red-500">
@@ -50,7 +62,7 @@
                             @enderror
                             <input
                                 class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-4 pl-4 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                                placeholder="ポイントを入力 (1～100)" type="number" name="task_point" />
+                                placeholder="クリアポイントを入力 (1～100)" type="number" name="task_point" />
                             @error('task_point')
                                 <div class="mt-3">
                                     <p class="text-red-500">
@@ -61,8 +73,8 @@
                         </label>
 
                         <button type="submit"
-                            class="mt-8 p-4 rounded-lg bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
-                            追加する
+                            class="mt-5 p-4 rounded-lg bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
+                            追加
                         </button>
                     </div>
 
@@ -70,7 +82,7 @@
 
                 {{-- 追記 --}}
                 @if ($tasks->isNotEmpty())
-                    <div class="max-w-7xl mx-auto mt-20">
+                    <div class="max-w-7xl mx-auto mt-5 sm:mt-10">
                         <div class="inline-block min-w-full py-2 align-middle">
                             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-300">
@@ -86,9 +98,9 @@
                                     <tbody class="divide-y divide-gray-200 bg-white">
                                         @foreach ($tasks as $item)
                                             <tr>
-                                                <td class="px-3 py-4 text-sm text-gray-500">
+                                                <td class="px-3 py-4 text-sm">
                                                     <div>
-                                                        <p class="text-blue-500">{{ $item->point }}P</p> {{ $item->name }}
+                                                        <p class="text-blue-500 text-lg">{{ $item->point }}P</p> {{ $item->name }}
                                                     </div>
                                                 </td>
                                                 <td class="p-0 text-right text-sm font-medium">
@@ -141,7 +153,7 @@
     <footer class="bg-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="py-4 text-center">
-                <p class="text-white text-sm">Todoアプリ</p>
+                <p class="text-white text-sm">山田育成</p>
             </div>
         </div>
     </footer>
