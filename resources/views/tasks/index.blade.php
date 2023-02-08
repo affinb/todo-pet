@@ -61,7 +61,7 @@
                         </label>
 
                         <button type="submit"
-                            class="mt-8 p-4 bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
+                            class="mt-8 p-4 rounded-lg bg-slate-800 text-white w-full max-w-xs hover:bg-slate-900 transition-colors">
                             追加する
                         </button>
                     </div>
@@ -88,7 +88,7 @@
                                             <tr>
                                                 <td class="px-3 py-4 text-sm text-gray-500">
                                                     <div>
-                                                        {{ $item->point }}P {{ $item->name }}
+                                                        <p class="text-blue-500">{{ $item->point }}P</p> {{ $item->name }}
                                                     </div>
                                                 </td>
                                                 <td class="p-0 text-right text-sm font-medium">
@@ -105,12 +105,12 @@
                                                                     value="{{ $item->status }}">
 
                                                                 <button type="submit"
-                                                                    class="bg-emerald-700 py-4 w-20 text-white md:hover:bg-emerald-800 transition-colors">完了</button>
+                                                                    class="bg-emerald-700 rounded px-2 py-4 w-12 sm:w-20 text-white md:hover:bg-emerald-800 transition-colors flex justify-center items-center">完了</button>
                                                             </form>
                                                         </div>
                                                         <div>
                                                             <a href="/tasks/{{ $item->id }}/edit/"
-                                                                class="inline-block text-center py-4 w-20 underline underline-offset-2 text-sky-600 md:hover:bg-sky-100 transition-colors">編集</a>
+                                                                class="inline-block text-center py-4 w-10 sm:w-20 underline underline-offset-2 text-sky-600 md:hover:bg-sky-100 transition-colors">編集</a>
                                                         </div>
                                                         <div>
                                                             <form onsubmit="return deleteTask();"
@@ -120,7 +120,7 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
-                                                                    class="py-4 w-20 md:hover:bg-slate-200 transition-colors">削除</button>
+                                                                    class="py-4 w-10 sm:w-20 md:hover:bg-slate-200 transition-colors">削除</button>
                                                             </form>
                                                         </div>
                                                     </div>
