@@ -142,16 +142,20 @@ class TaskController extends Controller
 
             // 完了タスクのポイントをペットのHPと合計ポイントに加算
             $pet = Pet::find(1);
-            $pet->hp += $task->point;
-            $pet->points += $task->point;
 
-            // HPの上限はとりあえず100
-            if($pet->hp >= 100) {
-                $pet->hp = 100;
+            // ペットが生きていたらの処理
+            if($pet->hp > 0) {
+                $pet->hp += $task->point;
+                $pet->points += $task->point;
+                
+                // HPの上限は100
+                if($pet->hp >= 100) {
+                    $pet->hp = 100;
+                }
+                $task->save();
+                $pet->save();
             }
 
-            $task->save();
-            $pet->save();
         }
         // リダイレクト
         return redirect('/tasks');

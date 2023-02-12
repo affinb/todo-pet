@@ -1,3 +1,11 @@
+<?php 
+    $now = time();            
+    $born = strtotime("2023-02-7-10:00:00");
+
+    $alive_time = floor(($now - $born) / 60 / 60 / 24 );
+    $alived_time = $alive_time;
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -26,29 +34,40 @@
 		@if($previous_feed->isNotEmpty())
 		<p class="text-2xl font-bold text-center">前回の食べたもの： {{ $previous_feed[0]->name }}</p>
 		@endif
-        <div class="text-center balloon2 w-screen flex justify-center items-center">
-            <p>私の戦闘力は{{ $pet_points }} です</p>
-          </div>
+
+        @if($pet_hp > 0)
+            <div class="text-center balloon2 w-screen flex justify-center items-center">
+                <p>私の戦闘力は{{ $pet_points }} です</p>
+            </div>
                 <div class="flex fuwafuwa">
-                    <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="100"
-                        height=''>
+                    <img src="{{ asset('images\school_gakuran_boy2.png') }}" alt="" width="100">
 		        </div>
         <div class="flex justify-center">
             {{-- HPの色判定 --}}
-            <p class="inline-block text-2xl font-bold text-center">山田君 残り体力： 
+            <p class="text-2xl font-bold text-center">山田 残りHP:</p> 
                 @if( $pet_hp >= 70 )
-                 <p class="inline-block text-green-500 text-2xl font-bold">{{ $pet_hp }}</p>
+                 <p class="mr-5 inline-block text-green-500 text-2xl font-bold">{{ $pet_hp }}</p>
                 @endif
                 @if( $pet_hp <= 69 && $pet_hp >= 30 )
-                 <p class="inline-block text-yellow-500 text-2xl font-bold">{{ $pet_hp }}</p>
+                 <p class="mr-5 inline-block text-yellow-500 text-2xl font-bold">{{ $pet_hp }}</p>
                 @endif
                 @if( $pet_hp <= 29 )
-                <p class="inline-block text-red-500 text-2xl font-bold">{{ $pet_hp }}</p>
-               @endif
-        </div>
+                <p class="mr-5 inline-block text-red-500 text-2xl font-bold">{{ $pet_hp }}</p> @endif
+                <p class="block text-2xl font-bold text-center">生存日数:<?= $alive_time; ?>日</p>
+            </div>
+            @endif
+            {{-- HP0で死んでいた時の表示 --}}
+            @if($pet_hp === 0 )
+            <div class="fuwafuwa">
+                <img src="{{ asset('images\12004.png') }}" alt="" width="100"> </div> <div class="text-center">
+               <p class="inline-block text-2xl font-bold">山田は死にました。あなたのせいです。</p>
+               <p class="inline-block text-2xl font-bold">山田が生きたのは<?= $alived_time ?>日でした</p>
+            </div>
+            </div>
+        @endif
+        
                 <form action="/tasks" method="post" class="mt-10">
                     @csrf
-
                     <div class="flex flex-col items-center">
                         <label class="w-full max-w-3xl mx-auto">
                             <input
