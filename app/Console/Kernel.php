@@ -20,10 +20,17 @@ class Kernel extends ConsoleKernel
     {
 	    // $schedule->command('inspire')->hourly();
 	    // 15分毎にHPを1ずつ減らす、25時間で100減る
-        $schedule->call(function () {
+        $schedule->call(function () 
+        {
             $pet = Pet::find(1);
+
+            // 既に死んでるなら減らさない
+            if($pet->hp === 0) {
+                die();
+            }
             $pet->hp -= 1;
             $pet->save();
+
         })->everyFifteenMinutes();
     }
 
